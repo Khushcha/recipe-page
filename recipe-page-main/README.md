@@ -30,7 +30,7 @@ The challenge was to build out a recipe page for a simple omelette, replicating 
 ### Links
 
 - Solution URL:https://github.com/Khushcha/recipe-page
-- Live Site URL:  https://khushcha.github.io/recipe-page
+- Live Site URL:  https://spectacular-kelpie-c27d82.netlify.app/
 
 ## My process
 
