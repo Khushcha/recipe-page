@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Omelette Recipe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: hsl(14, 45%, 36%);
+      --secondary-color: hsl(332, 51%, 32%);
+      --background-light: hsl(30, 54%, 90%);
+      --background-soft: hsl(330, 100%, 98%);
+      --text-dark: hsl(24, 5%, 18%);
+      --text-medium: hsl(30, 10%, 34%);
+      --card-bg: hsl(0, 0%, 100%);
+      --accent-bg: hsl(30, 18%, 87%);
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, var(--background-light), var(--background-soft));
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 375px;
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 700px;
+      }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .header img:hover {
+      transform: scale(1.1);
+      filter: brightness(1.1);
+    }
+
+    .content {
+      padding: 30px;
+      background: linear-gradient(to bottom, var(--card-bg), hsl(0, 0%, 98%));
+    }
+
+    .title {
+      font-family: 'Young Serif', serif;
+      font-size: 2.2em;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .description {
+      color: var(--text-medium);
+      text-align: left;
+      line-height: 1.4;
+      margin-bottom: 25px;
+      padding: 0 10px;
+      font-size: 1.1em;
+    }
+
+    .section {
+      background-color: var(--accent-bg);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      border: 1px solid hsl(30, 18%, 85%);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .section h3 {
+      color: var(--secondary-color);
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .section h3::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--secondary-color);
+      transition: width 0.3s ease;
+    }
+
+    .section h3:hover::after {
+      width: 100%;
+    }
+
+    .section ul, .section ol {
+      padding-left: 25px;
+    }
+
+    .section li {
+      margin-bottom: 12px;
+      line-height: 1.5;
+      color: var(--text-dark);
+    }
+
+    .collapsible {
+      display: block;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .collapsible.hidden {
+      display: none;
+    }
+
+    .timer {
+      margin-left: 10px;
+      font-weight: 600;
+      color: var(--primary-color);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    .instructions button {
+      background-color: var(--secondary-color);
+      color: var(--card-bg);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .instructions button:hover {
+      background-color: hsl(332, 51%, 40%);
+      transform: scale(1.05);
+    }
+
+    .nutrition table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      margin-top: 15px;
+    }
+
+    .nutrition td {
+      padding: 10px 15px;
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .nutrition td:first-child {
+      font-weight: 600;
+      color: var(--text-medium);
+    }
+
+    .toggle-btn {
+      background: linear-gradient(90deg, var(--secondary-color), hsl(332, 51%, 40%));
+      color: var(--card-bg);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      display: block;
+      margin: 0 auto 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: var(--text-medium);
+      padding: 20px;
+      background-color: var(--background-light);
+      border-top: 1px solid hsl(30, 18%, 85%);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="assets\images\image-omelette.jpeg" alt="Omelette Image">
+    </div>
+    <div class="content">
+      <h1 class="title">Simple Omelette Recipe</h1>
+      <p class="description">An easy and quick dish, perfect for any meal. This classic omelette combines beaten eggs cooked to perfection, optionally filled with your choice of cheese, vegetables, or meats.</p>
+      <div class="section prep-time">
+        <h3>Preparation time</h3>
+        <ul>
+          <li><strong>Total:</strong> Approximately 10 minutes</li>
+          <li><strong>Preparation:</strong> 5 minutes</li>
+          <li><strong>Cooking:</strong> 5 minutes</li>
+        </ul>
+      </div>
+      <div class="section ingredients">
+        <h3 onclick="toggleCollapse('ingredients-list')">Ingredients</h3>
+        <ul id="ingredients-list" class="collapsible">
+          <li>2-3 large eggs</li>
+          <li>Salt, to taste</li>
+          <li>Pepper, to taste</li>
+          <li>1 tablespoon of butter or oil</li>
+          <li>Optional fillings: cheese, diced vegetables, cooked meats, herbs</li>
+        </ul>
+      </div>
+      <div class="section instructions">
+        <h3>Instructions</h3>
+        <ol>
+          <li>Beat the eggs: In a bowl, beat the eggs with a pinch of salt and pepper until they are well mixed. You can add a tablespoon of water or milk for a fluffier texture. <button onclick="startTimer(60)">Start 1m Timer</button> <span class="timer" id="timer1">00:00</span></li>
+          <li>Heat the pan: Place a non-stick frying pan over medium heat and add butter or oil. <button onclick="startTimer(120)">Start 2m Timer</button> <span class="timer" id="timer2">00:00</span></li>
+          <li>Cook the omelette: Once the butter is melted and bubbling, pour in the eggs. Tilt the pan to ensure the eggs evenly coat the surface. <button onclick="startTimer(180)">Start 3m Timer</button> <span class="timer" id="timer3">00:00</span></li>
+          <li>Add fillings (optional): When the eggs begin to set at the edges but are still slightly runny in the middle, sprinkle your chosen fillings over one half of the omelette. <button onclick="startTimer(60)">Start 1m Timer</button> <span class="timer" id="timer4">00:00</span></li>
+          <li>Fold and serve: As the omelette continues to cook, carefully lift one edge and fold it over the fillings. Let it cook for another minute, then slide it onto a plate. <button onclick="startTimer(60)">Start 1m Timer</button> <span class="timer" id="timer5">00:00</span></li>
+          <li>Enjoy: Serve hot, with additional salt and pepper if needed.</li>
+        </ol>
+      </div>
+      <div class="section nutrition" id="nutrition-section" style="display: none;">
+        <h3>Nutrition</h3>
+        <p>The table below shows nutritional values per serving without the additional fillings.</p>
+        <table>
+          <tr><td>Calories</td><td>277kcal</td></tr>
+          <tr><td>Carbs</td><td>0g</td></tr>
+          <tr><td>Protein</td><td>20g</td></tr>
+          <tr><td>Fat</td><td>22g</td></tr>
+        </table>
+        <button class="toggle-btn" onclick="toggleNutrition()">Hide Nutrition</button>
+      </div>
+      <button class="toggle-btn" onclick="toggleNutrition()" style="display: block; margin: 0 auto;">Show Nutrition</button>
+    </div>
+    <div class="footer">
+      Challenge by Frontend Mentor. Coded by Khushbu Chaurasia.
+    </div>
+  </div>
+  <script>
+    function toggleCollapse(id) {
+      const element = document.getElementById(id);
+      element.classList.toggle('hidden');
+    }
+
+    function toggleNutrition() {
+      const section = document.getElementById('nutrition-section');
+      const button = document.querySelectorAll('.toggle-btn');
+      if (section.style.display === 'none') {
+        section.style.display = 'block';
+        button[0].textContent = 'Hide Nutrition';
+        button[1].style.display = 'none';
+      } else {
+        section.style.display = 'none';
+        button[0].textContent = 'Show Nutrition';
+        button[1].style.display = 'block';
+      }
+    }
+
+    function startTimer(seconds) {
+      let time = seconds;
+      const timerId = this.event.target.nextElementSibling.id;
+      const timer = document.getElementById(timerId);
+      timer.textContent = `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, '0')}`;
+      const interval = setInterval(() => {
+        time--;
+        timer.textContent = `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, '0')}`;
+        if (time < 0) {
+          clearInterval(interval);
+          timer.textContent = 'Done!';
+          alert('Time is up!');
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
